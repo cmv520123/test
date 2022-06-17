@@ -36,4 +36,4 @@ def DATA():
             return render_template('data.html',name="下載成功自己去找!!")
     return render_template('data.html',name="")
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False)
+    app.run()
