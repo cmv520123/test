@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+    {% if name == "" %}
+    <h1>安安你好</h1>
+    <input type="button" value="測試連結" onclick="location.href='/data'">
+
+	<form method="post">
+		<input type="text" name="user">
+		<input type="submit" name="send" value="送出">
+	</form>
+	
+	{% else %}
+	<p>{{name}}</p>
+    <img src="static/{{keyword}}_文字雲.png" alt="圖片" />
+    <img src="static/{{keyword}}_正負評價比_同商品.png/" alt="圖片" />
+    <img src="static/{{keyword}}_品牌聲量圖.png/" alt="圖片" />
+    <img src="static/{{keyword}}_網友在意面向圖.png/" alt="圖片" />
+    <button value="測試連結" onclick="displayResult()">讀取圖片</button>
+    {% endif %}
+</body>
+</html>
