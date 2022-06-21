@@ -34,7 +34,8 @@ def DATA():
     if request.method =='POST':
         if request.values['send']=='送出':
             keyword=request.values['user']
-            
+            from crawler_all import crawler_all
+            crawler_all(keyword=keyword)
             return render_template('data.html',name="下載成功自己去找!!")
         return render_template('data.html',name="")
     
