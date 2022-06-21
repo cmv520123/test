@@ -78,6 +78,7 @@ def crawler_all(keyword):
             num += 1
             ws.append(article_info)
             print(web + '已完成寫入' + str(num) + '篇文章')
+            break
         except KeyError as k :
             print(k)        
         except AttributeError as attr:
