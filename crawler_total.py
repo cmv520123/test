@@ -20,8 +20,8 @@ def crawler_all(keyword):
     # raw_folder = r'C:\Users\User\Desktop\0614_datasets\ '+keyword
     # txt_folder = r'C:\Users\User\Desktop\0614_datasets\ '
 
-#     os.makedirs(keyword+'_data',exist_ok = True)
-#     os.makedirs(keyword+'_analysis',exist_ok = True)
+    os.makedirs(keyword+'_data',exist_ok = True)
+    os.makedirs(keyword+'_analysis',exist_ok = True)
     headers = {
         'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'
     }
