@@ -3,28 +3,6 @@ from flask_cors import CORS
 import numpy as np
 import requests as req
 import pandas as pd
-from requests_html import HTML
-import re
-import random
-import time
-import json
-from bs4 import BeautifulSoup
-from openpyxl import Workbook
-import jieba
-from collections import Counter # 次數統計
-from tkinter import font
-import matplotlib.pyplot as plt
-from matplotlib.font_manager import FontProperties
-from matplotlib import colors
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator  
-from PIL import Image # 圖片轉array陣列
-import pandas as pd
-import seaborn as sns
-import os
-import csv
-import parsel #數據解析模組
-from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
-from json.decoder import JSONDecodeError
 
 app = Flask(__name__)
 CORS(app)
