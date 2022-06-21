@@ -1,16 +1,3 @@
-#媽咪拜爬蟲
-from bs4 import BeautifulSoup
-from openpyxl import Workbook
-import parsel #數據解析模組
-import requests #數據請求模組
-import csv
-import json
-from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
-import re
-import pandas as pd
-from json.decoder import JSONDecodeError
-import os
-
 # keyword = '保力達'
 def crawler_all(keyword):
     from bs4 import BeautifulSoup
