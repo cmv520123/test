@@ -33,7 +33,6 @@ def index():
 def DATA():
     if request.method =='POST':
         if request.values['send']=='送出':
-      
             keyword=request.values['user']
             def crawler_all(keyword):
                 # keywords_list = ['老協珍','田原香','農純鄉','芳茲','娘家','純煉']
@@ -900,9 +899,7 @@ def DATA():
                 #     text = f.read()
                 with open(all_article, encoding="utf-8", errors='ignore') as f:
                     text = f.read()
-
-            
-               return render_template('data.html',name="下載成功自己去找!!")
-            return render_template('data.html',name="")
+            return render_template('data.html',name="下載成功自己去找!!")
+        return render_template('data.html',name="")
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=80)
