@@ -5,7 +5,7 @@ from rq import Worker, Queue, Connection
 
 listen = ['high', 'default', 'low']
 
-redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:13218')
+redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:1314')
 
 conn = redis.from_url(redis_url)
 
