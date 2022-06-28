@@ -43,7 +43,7 @@ def DATA():
             keyword=request.values['user']
             from crawler_all import crawler_all
             result = q.enqueue(crawler_all,keyword)
-            df = pd.read_excel(raw_folder + '/' +keyword + '_' + web + '_網路爬蟲.xlsx')
+            df = pd.read_excel('滴雞精' + '/' +keyword + '_' + web + '_網路爬蟲.xlsx')
             
         return render_template('data.html',name="下載成功自己去找!!",result=result)
     return render_template('data.html',name="")
