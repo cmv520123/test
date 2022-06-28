@@ -93,8 +93,9 @@ def crawler_all(keyword):
     #         print(article_info)
     #         break
 
-    wb.save(raw_folder +keyword + '_' + web + '_網路爬蟲.xlsx')
-#     wb.save('C:\Users\User\Downloads\' +keyword + '_' + web + '_網路爬蟲.xlsx')
+#     wb.save(raw_folder +keyword + '_' + web + '_網路爬蟲.xlsx')
+    return wb
+    wb.save('C:\Users\User\Downloads\' +keyword + '_' + web + '_網路爬蟲.xlsx')
 
     df = pd.read_excel(raw_folder + '/' +keyword + '_' + web + '_網路爬蟲.xlsx') #請自行依檔案位置調整
     print(keyword+'_'+web+ '_總共有'+str(len(df))+'篇文章')
@@ -112,110 +113,110 @@ def crawler_all(keyword):
     # }
     # -*- coding: utf-8 -*-
  
-    wb = Workbook()
-    ws = wb.active
+#     wb = Workbook()
+#     ws = wb.active
 
-    title =["文章標題","發佈日期",'關鍵字',"文章內容"]
-    ws.append(title)
-    web = '媽咪拜'
+#     title =["文章標題","發佈日期",'關鍵字',"文章內容"]
+#     ws.append(title)
+#     web = '媽咪拜'
 
-    article_url=[]
-    article_url_2 = []
+#     article_url=[]
+#     article_url_2 = []
 
-    for i in range(1,20):
-        try:
-            url = 'https://mamibuy.com.tw/search/'+keyword+'?p='+str(i)+'&s=1'
-            response = requests.get(url=url , headers = headers)
-            selector = parsel.Selector(response.text) # 把獲取下來的html字符串數據，轉成selector可解析的對象
-        # print (selector) #<Selector xpath=None data='<html lang="zh-CN" class="ua-mac ua-w...'>
-        # css選擇器：就是根據標籤屬性內容，提取相關數據
-            lis = selector.css('.well .link-black') #第一次提取，獲取所有li標籤 返回列表
-        # print(lis)
-            for li in lis :
-                href = li.css('a::attr(href)').get() #詳情頁 獲取attr屬性
-                article_url.append(href)
-        except KeyError as k :
-            print(k)     
-        except AttributeError as attr:
-            print(attr)
-        except NameError as name:
-            print(name)
-        except IndexError as index:
-            print(index)
-        except JSONDecodeError :
-            print(JSONDecodeError)
-        # print(article_url)
-        # break
-    # print(len(article_url))
+#     for i in range(1,20):
+#         try:
+#             url = 'https://mamibuy.com.tw/search/'+keyword+'?p='+str(i)+'&s=1'
+#             response = requests.get(url=url , headers = headers)
+#             selector = parsel.Selector(response.text) # 把獲取下來的html字符串數據，轉成selector可解析的對象
+#         # print (selector) #<Selector xpath=None data='<html lang="zh-CN" class="ua-mac ua-w...'>
+#         # css選擇器：就是根據標籤屬性內容，提取相關數據
+#             lis = selector.css('.well .link-black') #第一次提取，獲取所有li標籤 返回列表
+#         # print(lis)
+#             for li in lis :
+#                 href = li.css('a::attr(href)').get() #詳情頁 獲取attr屬性
+#                 article_url.append(href)
+#         except KeyError as k :
+#             print(k)     
+#         except AttributeError as attr:
+#             print(attr)
+#         except NameError as name:
+#             print(name)
+#         except IndexError as index:
+#             print(index)
+#         except JSONDecodeError :
+#             print(JSONDecodeError)
+#         # print(article_url)
+#         # break
+#     # print(len(article_url))
 
-    for i in article_url :
-        y = i.replace('https://mamibuy.com.tw','')
-        z = 'https://mamibuy.com.tw'+ y
-        article_url_2.append(z)
-        # print(z)
+#     for i in article_url :
+#         y = i.replace('https://mamibuy.com.tw','')
+#         z = 'https://mamibuy.com.tw'+ y
+#         article_url_2.append(z)
+#         # print(z)
 
-    print(web + '總共有'+str(len(article_url_2))+'個網址') 
+#     print(web + '總共有'+str(len(article_url_2))+'個網址') 
 
-    # 爬取所有文章的內文
-    num = 0 
-    for url in article_url_2:
-        # try:
-        # print(url)
-        # 1.發送請求
+#     # 爬取所有文章的內文
+#     num = 0 
+#     for url in article_url_2:
+#         # try:
+#         # print(url)
+#         # 1.發送請求
 
-        res = requests.get(url=url,headers=headers)
+#         res = requests.get(url=url,headers=headers)
 
-        soup = BeautifulSoup(res.text,"lxml")
-        json_file = soup.select("script[type='application/ld+json']")
-        # j = json_file[1]
-        # print(json_file) 
-        # print(type(json_file))
-        #<class 'bs4.element.Tag'>
-        try:
-            for i in json_file:
+#         soup = BeautifulSoup(res.text,"lxml")
+#         json_file = soup.select("script[type='application/ld+json']")
+#         # j = json_file[1]
+#         # print(json_file) 
+#         # print(type(json_file))
+#         #<class 'bs4.element.Tag'>
+#         try:
+#             for i in json_file:
 
-                targets = json.loads(i.get_text(strip=True),strict=False)
-                # strict=False 不要那麼嚴謹 字典取不到的 就算了
-                # print(targets['articleBody'])
-                titles_list=["headline","datePublished",'keywords',"articleBody"]
-                # title =["文章標題","發佈日期",'關鍵字',"文章內容"]
-                article_info = []
-                try :
-                    for title in titles_list:                
-                        y = targets[title]
-                        y= ILLEGAL_CHARACTERS_RE.sub(r'', y)
-                        article_info.append(y)
-                        # print(title,':',y)    
-                except KeyError as k :
-                    print(k)             
-                except AttributeError as attr:
-                    print(attr)
-                except NameError as name:
-                    print(name)
-                except IndexError as index:
-                    print(index)
-                except JSONDecodeError :
-                    print(JSONDecodeError)
-                if len(article_info) != 0 :
-                    num+=1
-                    ws.append(article_info)
-                    print(web + '已完成寫入' + str(num) + '篇文章')
-        except KeyError as k :
-            print(k)       
-        except AttributeError as attr:
-            print(attr)
-        except NameError as name:
-            print(name)
-        except IndexError as index:
-            print(index)
-        except JSONDecodeError :
-            print(JSONDecodeError)
+#                 targets = json.loads(i.get_text(strip=True),strict=False)
+#                 # strict=False 不要那麼嚴謹 字典取不到的 就算了
+#                 # print(targets['articleBody'])
+#                 titles_list=["headline","datePublished",'keywords',"articleBody"]
+#                 # title =["文章標題","發佈日期",'關鍵字',"文章內容"]
+#                 article_info = []
+#                 try :
+#                     for title in titles_list:                
+#                         y = targets[title]
+#                         y= ILLEGAL_CHARACTERS_RE.sub(r'', y)
+#                         article_info.append(y)
+#                         # print(title,':',y)    
+#                 except KeyError as k :
+#                     print(k)             
+#                 except AttributeError as attr:
+#                     print(attr)
+#                 except NameError as name:
+#                     print(name)
+#                 except IndexError as index:
+#                     print(index)
+#                 except JSONDecodeError :
+#                     print(JSONDecodeError)
+#                 if len(article_info) != 0 :
+#                     num+=1
+#                     ws.append(article_info)
+#                     print(web + '已完成寫入' + str(num) + '篇文章')
+#         except KeyError as k :
+#             print(k)       
+#         except AttributeError as attr:
+#             print(attr)
+#         except NameError as name:
+#             print(name)
+#         except IndexError as index:
+#             print(index)
+#         except JSONDecodeError :
+#             print(JSONDecodeError)
 
-    wb.save(raw_folder +keyword + '_' + web + '_網路爬蟲.xlsx')
+#     wb.save(raw_folder +keyword + '_' + web + '_網路爬蟲.xlsx')
 
-    import pandas as pd
-    df = pd.read_excel(raw_folder + '/' +keyword + '_' + web + '_網路爬蟲.xlsx') #請自行依檔案位置調整
-    print(keyword+'_'+web+ '_總共有'+str(len(df))+'篇文章')
+#     import pandas as pd
+#     df = pd.read_excel(raw_folder + '/' +keyword + '_' + web + '_網路爬蟲.xlsx') #請自行依檔案位置調整
+#     print(keyword+'_'+web+ '_總共有'+str(len(df))+'篇文章')
 
     
 #     #爬取Dcard深卡貼文標題及內文
