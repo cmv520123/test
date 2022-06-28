@@ -93,7 +93,7 @@ def crawler_all(keyword):
     #         print(article_info)
     #         break
 
-    wb.save(keyword + '_' + web + '_網路爬蟲.xlsx')
+    wb.save(raw_folder +keyword + '_' + web + '_網路爬蟲.xlsx')
 
 #     wb.save('C:\Users\User\Downloads\' +keyword + '_' + web + '_網路爬蟲.xlsx')
 
