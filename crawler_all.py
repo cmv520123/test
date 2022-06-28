@@ -93,9 +93,9 @@ def crawler_all(keyword):
     #         print(article_info)
     #         break
 
-#     wb.save(raw_folder +keyword + '_' + web + '_網路爬蟲.xlsx')
+    wb.save(raw_folder +keyword + '_' + web + '_網路爬蟲.xlsx')
     return wb
-    wb.save('C:\Users\User\Downloads\' +keyword + '_' + web + '_網路爬蟲.xlsx')
+#     wb.save('C:\Users\User\Downloads\' +keyword + '_' + web + '_網路爬蟲.xlsx')
 
     df = pd.read_excel(raw_folder + '/' +keyword + '_' + web + '_網路爬蟲.xlsx') #請自行依檔案位置調整
     print(keyword+'_'+web+ '_總共有'+str(len(df))+'篇文章')
