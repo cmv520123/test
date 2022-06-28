@@ -55,3 +55,4 @@ webencodings==0.5.1
 websockets==10.3
 Werkzeug==2.1.1
 wordcloud==1.8.1
+redis==4.3.4
