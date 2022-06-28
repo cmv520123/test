@@ -44,7 +44,7 @@ def DATA():
             from crawler_all import crawler_all
             result = q.enqueue(crawler_all,keyword)
             
-            return render_template('data.html',name="下載成功自己去找!!",result=result,crawler_all=wb)
+        return render_template('data.html',name="下載成功自己去找!!",result=result)
     return render_template('data.html',name="")
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=1314)
