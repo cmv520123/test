@@ -105,6 +105,7 @@ def crawler_all(keyword):
     print(pathlib.Path().absolute())
     print(pathlib.Path(__file__).parent.absolute())
     print(os.path.dirname(os.path.realpath(__file__)))
+    print(df)
 
 #媽咪拜爬蟲
 
