@@ -12,6 +12,9 @@ def crawler_all(keyword):
     from json.decoder import JSONDecodeError
     import os
     import numpy as np
+    import pathlib
+
+    
     web = 'total'
     raw_folder = keyword+'/'
     all_article = raw_folder +keyword + '_'  + web +'_網路爬蟲.txt'
@@ -99,7 +102,9 @@ def crawler_all(keyword):
 
     df = pd.read_excel(raw_folder + '/' +keyword + '_' + web + '_網路爬蟲.xlsx') #請自行依檔案位置調整
     print(keyword+'_'+web+ '_總共有'+str(len(df))+'篇文章')
-    return wb
+    print(pathlib.Path().absolute())
+    print(pathlib.Path(__file__).parent.absolute())
+    print(os.path.dirname(os.path.realpath(__file__)))
 
 #媽咪拜爬蟲
 
