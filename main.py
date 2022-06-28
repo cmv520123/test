@@ -45,7 +45,7 @@ def DATA():
             result = q.enqueue(crawler_all,keyword)
             df = pd.read_excel('滴雞精' + '/' +keyword + '_' + '媽咪愛' + '_網路爬蟲.xlsx')
             
-        return render_template('data.html',name="下載成功自己去找!!",result=result)
+        return render_template('data.html',name="下載成功自己去找!!",result=result,df=df)
     return render_template('data.html',name="")
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=1314)
