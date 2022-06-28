@@ -38,7 +38,7 @@ class EnqueueData(namedtuple('EnqueueData', ["func", "args", "kwargs", "timeout"
 @total_ordering
 class Queue:
     job_class = Job
-    # DEFAULT_TIMEOUT = 180  # Default timeout seconds.
+    DEFAULT_TIMEOUT = 12000  # Default timeout seconds.
     redis_queue_namespace_prefix = 'rq:queue:'
     redis_queues_keys = 'rq:queues'
 
