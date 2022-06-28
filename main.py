@@ -10,17 +10,17 @@ import time
 import json
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
-from bs4 import BeautifulSoup
-from openpyxl import Workbook
 import parsel #數據解析模組
-import requests #數據請求模組
 import csv
-import json
 from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
-import re
-import pandas as pd
 from json.decoder import JSONDecodeError
 import os
+
+from rq import Queue
+from worker import conn
+
+q = Queue(connection=conn)
+
 
 app = Flask(__name__)
 CORS(app)
@@ -42,9 +42,9 @@ def DATA():
       
             keyword=request.values['user']
             from crawler_all import crawler_all
-            crawler_all(keyword=keyword)
+            result = q.enqueue(crawler_all,keyword)
             
-            return render_template('data.html',name="下載成功自己去找!!")
+            return render_template('data.html',name="下載成功自己去找!!",result=result)
     return render_template('data.html',name="")
 if __name__ == '__main__':
     app.run()
