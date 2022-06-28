@@ -47,4 +47,4 @@ def DATA():
             return render_template('data.html',name="下載成功自己去找!!",result=result)
     return render_template('data.html',name="")
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=1314)
